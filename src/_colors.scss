@@ -1,0 +1,25 @@
+$light-colors: (
+  bg: #eee,
+  color: #24292F,
+);
+$dark-colors: (
+  bg: #22272E,
+  color: #e8eaed,
+);
+
+:root {
+  // Use the light colors by default
+  @each $name, $color  in $light-colors { --#{$name}: #{$color}; }
+
+  &[color-scheme=dark] {  // Override the light colors with the dark ones
+    @each $name, $color  in $dark-colors { --#{$name}: #{$color}; }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    &:not([color-scheme=light]) { // Use the dark colors if color-scheme is not light
+      @each $name, $color  in $dark-colors { --#{$name}: #{$color}; }
+    }
+  }
+}
+
+
