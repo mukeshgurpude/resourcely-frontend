@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "resourcely",
+  "name": "A Resource Sharing Platform",
   "icons": [
     {
       "src": "favicon.ico",
