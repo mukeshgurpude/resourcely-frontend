@@ -1,0 +1,48 @@
+.logo {
+  padding: .5em 1em;
+  position: relative;
+  text-decoration: underline var(--logo-border);
+  color: var(--dimmed);
+  letter-spacing: .5ch;
+  --size: 0;
+  --opacity: 0;
+  cursor: pointer;
+  &:hover { --size: 100%; --opacity: 1;}
+  &::first-letter {
+    line-height: 1.5em;
+    font-size: 1.5em;
+    vertical-align: sub;
+    font-weight: bold;
+    color: var(--color);
+  }
+  &:after, &:before {
+    position: absolute;
+    content: '';
+    width: var(--size);
+    height: var(--size);
+    border-color: var(--logo-border);
+    border-style: solid;
+    --faint-color: var(--dimmed);
+    transition: all 500ms;
+    opacity: var(--opacity);
+    z-index: -1;
+  }
+  &:before {
+    top: 0;
+    left: 0;
+    border-right-color: var(--faint-color);
+    border-bottom-color: var(--faint-color);
+  }
+  &:after {
+    bottom: 0;
+    right: 0;
+    // border-width: 0 var(--border-width) var(--border-width) 0;
+    border-left-color: var(--faint-color);
+    border-top-color: var(--faint-color);
+  }
+}
+
+.anchor {
+  color: inherit;
+  text-decoration: inherit;
+}
