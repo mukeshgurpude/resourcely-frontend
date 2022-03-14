@@ -1,10 +1,18 @@
 $light-colors: (
   bg: #eee,
-  color: #24292F,
+  color: #0E141B,
+  logo-border: #24292F,
+  dimmed: #232121,
+  secondary-bg: #ddd,
+  shadow: 0px 0px 5px rgba(0, 0, 0, 0.4)
 );
 $dark-colors: (
-  bg: #22272E,
+  bg: #0E141B,
   color: #e8eaed,
+  logo-border: #fff,
+  dimmed: #ddd,
+  secondary-bg: rgba(255, 255, 255, 0.2),
+  shadow: 0px 0px 5px rgba(255, 255, 255, 0.4)
 );
 
 :root {
@@ -21,5 +29,3 @@ $dark-colors: (
     }
   }
 }
-
-
