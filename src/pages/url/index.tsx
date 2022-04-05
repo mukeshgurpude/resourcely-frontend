@@ -1,4 +1,4 @@
-import { Anchor, Button, Code, Group, Text, TextInput, Title } from "@mantine/core";
+import { Anchor, Button, Code, Group, Text, TextInput } from "@mantine/core";
 import { useEffect, useState } from "react";
 
 const base_url = 'http://localhost:8000/api/v1/shortener'
@@ -28,8 +28,8 @@ export default function Url() {
     }} style={{padding: '1em'}}>
       <Group align='center'>
         <TextInput
-          label='Original Url'
           name="url" value={url}
+          label='Original Url' type="url"
           onChange={(e) => setUrl(e.target.value)}
           placeholder="Url to shorten" required
         />

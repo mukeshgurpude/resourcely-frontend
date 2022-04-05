@@ -1,5 +1,6 @@
 import { Anchor, Divider, Group, Navbar, Title } from "@mantine/core";
 import { NavLink } from "react-router-dom";
+import Logo from '../logo'
 
 const links = [
   { title: 'Url Shortner', path: '/'},
@@ -10,7 +11,7 @@ const links = [
 
 export default function Nav() {
   return <Navbar style={{flex: '0 0 15%', paddingLeft: '1em'}}>
-    <Title children='Resourcely'/>
+    <Title children={<Logo/>}/>
     <Divider/>
     <Navbar.Section grow>
       <Group direction="column" align='stretch' sx={{paddingRight: '10px'}}>
