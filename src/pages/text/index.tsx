@@ -1,11 +1,15 @@
 import { useEffect, useState } from 'react'
-import { Button, Group, Select, Text, Textarea, TextInput } from '@mantine/core'
+import { Button, Group, InputWrapper, Select, Text, TextInput } from '@mantine/core'
 import { Language } from 'prism-react-renderer'
+import MonacoEditor from '../../components/editor'
 import Shortcode from '../../components/shortcode'
 import api from '../../services'
 
 export type Lang = Language | 'plain';
-const languages: Lang[] = [ "markup", "bash", "clike", "c", "cpp", "css", "javascript", "jsx", "coffeescript", "actionscript", "css-extr", "diff", "git", "go", "graphql", "handlebars", "json", "less", "makefile", "markdown", "objectivec", "ocaml", "plain", "python", "reason", "sass", "scss", "sql", "stylus", "tsx", "typescript", "wasm", "yaml" ];
+const languages: Lang[] = [ "markup", "bash", "clike", "c", "cpp", "css", "javascript",
+  "jsx", "coffeescript", "actionscript", "css-extr", "diff", "git", "go", "graphql", "handlebars",
+  "json", "less", "makefile", "markdown", "objectivec", "ocaml", "plain", "python", "reason", "sass",
+  "scss", "sql", "stylus", "tsx", "typescript", "wasm", "yaml" ];
 
 const max_length = 1024
 export type TextType = {
@@ -43,13 +47,10 @@ export default function TextUi() {
         placeholder='Text title' label='Title' required
         value={title} onChange={e => setTitle(e.target.value)}
       />
-      <Select searchable value={language} onChange={data => setLang(data as Lang)} data={languages} />
-      <Textarea
-        cols={50} minRows={5} maxLength={1024}
-        placeholder='Enter text here to upload'
-        label="Text content" required
-        value={content} onChange={(e) => setContent(e.target.value)}
-      />
+      <Select label='Language' searchable value={language} onChange={data => setLang(data as Lang)} data={languages} required />
+      <InputWrapper label='Text' required>
+        <MonacoEditor value={content} setValue={setContent} language={language} />
+      </InputWrapper>
       <Button style={{alignSelf: 'center'}} type='submit' children="Upload" {...{loading}} disabled={content.length > max_length} />
     </form>
     <Group direction="column">
