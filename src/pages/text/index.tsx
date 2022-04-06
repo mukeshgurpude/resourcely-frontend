@@ -1,10 +1,14 @@
 import { useEffect, useState } from 'react'
-import { Button, Group, Text, Textarea, TextInput } from '@mantine/core'
+import { Button, Group, Select, Text, Textarea, TextInput } from '@mantine/core'
+import { Language } from 'prism-react-renderer'
 import Shortcode from '../../components/shortcode'
 import api from '../../services'
 
+export type Lang = Language | 'plain';
+const languages: Lang[] = [ "markup", "bash", "clike", "c", "cpp", "css", "javascript", "jsx", "coffeescript", "actionscript", "css-extr", "diff", "git", "go", "graphql", "handlebars", "json", "less", "makefile", "markdown", "objectivec", "ocaml", "plain", "python", "reason", "sass", "scss", "sql", "stylus", "tsx", "typescript", "wasm", "yaml" ];
+
 const max_length = 1024
-type TextType = {
+export type TextType = {
   text ?: string
   error ?: string
   shortcode ?: string
@@ -13,6 +17,7 @@ type TextType = {
 export default function TextUi() {
   const [content, setContent] = useState('')
   const [title, setTitle] = useState('')
+  const [language, setLang] = useState<Lang>('plain')
   const [loading, setLoading] = useState(false)
   const [result, setResult] = useState<TextType>({})
 
@@ -28,7 +33,7 @@ export default function TextUi() {
     <form onSubmit={(event) => {
       event.preventDefault()
       setLoading(true)
-      api.post('/text', { text: content, title })
+      api.post('/text', { text: content, title, language })
         .then(res => setResult(res.data))
         .catch(({response: {data}}) => setResult(data))
         .finally(() => setLoading(false))
@@ -38,6 +43,7 @@ export default function TextUi() {
         placeholder='Text title' label='Title' required
         value={title} onChange={e => setTitle(e.target.value)}
       />
+      <Select searchable value={language} onChange={data => setLang(data as Lang)} data={languages} />
       <Textarea
         cols={50} minRows={5} maxLength={1024}
         placeholder='Enter text here to upload'
@@ -54,3 +60,5 @@ export default function TextUi() {
     </Group>
   </Group>
 }
+
+export { TextView } from './view'

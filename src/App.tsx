@@ -4,7 +4,7 @@ import Footer from './components/footer';
 import Header from './components/header';
 import Nav from './components/nav';
 import Url from './pages/url'
-import Text from './pages/text'
+import Text, { TextView } from './pages/text'
 
 function App() {
   return <BrowserRouter>
@@ -14,7 +14,10 @@ function App() {
       <Container fluid style={{flex: '0 0 100%'}}>
         <Routes>
           <Route path="/" element={<Url/>} />
-          <Route path="/text" element={<Text/>} />
+          <Route path="/text">
+            <Route path='' element={<Text/>}/>
+            <Route path=":shortcode" element={<TextView/>} />
+          </Route>
           <Route path='*' element={<div>Not found</div>} />
         </Routes>
       </Container>
