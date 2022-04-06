@@ -1,7 +1,7 @@
-import { Anchor, Button, Code, Group, Text, TextInput } from "@mantine/core";
+import { Button, Code, Group, Text, TextInput } from "@mantine/core";
 import { useEffect, useState } from "react";
-
-const base_url = 'http://localhost:8000/api/v1/shortener'
+import Shortcode from "../../components/shortcode";
+import api, { base_url } from '../../services';
 
 type UrlType = {
   original_url ?: string
@@ -9,23 +9,25 @@ type UrlType = {
   shortcode ?: string
 }
 
+const shortner_url = base_url + '/shortener'
+
 export default function Url() {
   const [url, setUrl] = useState('')
   const [result, setResult] = useState<UrlType>({})
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => { setResult({}) }, [url])
 
   return <Group direction="column" align='center'>
     <form onSubmit={(event) => {
       event.preventDefault()
-      fetch(base_url, {
-        method: 'post',
-        body: JSON.stringify({ original_url: url }),
-        headers: { 'Content-Type': 'application/json' }
-      }).then(res => res.json())
-      .then(setResult)
-      .catch(setResult)
+      setLoading(true)
+      api.post('/shortener', { original_url: url })
+        .then(res => setResult(res.data))
+        .catch(setResult)
+        .finally(() => setLoading(false))
     }} style={{padding: '1em'}}>
+
       <Group align='center'>
         <TextInput
           name="url" value={url}
@@ -33,7 +35,7 @@ export default function Url() {
           onChange={(e) => setUrl(e.target.value)}
           placeholder="Url to shorten" required
         />
-        <Button type="submit" style={{alignSelf: 'end'}} children="Shorten"/>
+        <Button {...{ loading }} type="submit" style={{alignSelf: 'end'}} children="Shorten"/>
       </Group>
     </form>
     <Group direction="column">
@@ -44,13 +46,7 @@ export default function Url() {
         <Text>Original URL: </Text>
         <Code>{result.original_url}</Code>
       </Group>
-      <Group>
-        <Text>Shortcode: </Text>
-        <Anchor target='_blank' href={`${base_url}/${result.shortcode}?mode=redirect`}>{result.shortcode}</Anchor>
-        <Button children='📋' onClick={() => {
-          navigator.clipboard.writeText(`${base_url}/${result.shortcode}?mode=redirect`)
-        }} />
-      </Group>
+      <Shortcode base_uri={shortner_url} shortcode={result.shortcode} querystring={{mode: 'redirect'}} external />
     </>
     }
     {
