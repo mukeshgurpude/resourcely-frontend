@@ -1,5 +1,6 @@
-import { Anchor, Button, Code, Group, Text, TextInput } from "@mantine/core";
+import { Button, Code, Group, Text, TextInput } from "@mantine/core";
 import { useEffect, useState } from "react";
+import Shortcode from "../../components/shortcode";
 import api, { base_url } from '../../services';
 
 type UrlType = {
@@ -45,13 +46,7 @@ export default function Url() {
         <Text>Original URL: </Text>
         <Code>{result.original_url}</Code>
       </Group>
-      <Group>
-        <Text>Shortcode: </Text>
-        <Anchor target='_blank' href={`${shortner_url}/${result.shortcode}?mode=redirect`}>{result.shortcode}</Anchor>
-        <Button children='📋' onClick={() => {
-          navigator.clipboard.writeText(`${shortner_url}/${result.shortcode}?mode=redirect`)
-        }} />
-      </Group>
+      <Shortcode base_uri={shortner_url} shortcode={result.shortcode} querystring={{mode: 'redirect'}} external />
     </>
     }
     {

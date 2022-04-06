@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { Anchor, Button, Group, Text, Textarea, TextInput } from '@mantine/core'
-import { Link } from 'react-router-dom'
+import { Button, Group, Text, Textarea, TextInput } from '@mantine/core'
+import Shortcode from '../../components/shortcode'
 import api from '../../services'
 
 const max_length = 1024
@@ -32,7 +32,7 @@ export default function TextUi() {
         .then(res => setResult(res.data))
         .catch(({response: {data}}) => setResult(data))
         .finally(() => setLoading(false))
-    }} style={{display: 'flex', flexFlow: 'column', gap: 5}}>
+    }} style={{display: 'flex', flexFlow: 'column', gap: 15}}>
       <TextInput
         maxLength={30}
         placeholder='Text title' label='Title' required
@@ -47,19 +47,10 @@ export default function TextUi() {
       <Button style={{alignSelf: 'center'}} type='submit' children="Upload" {...{loading}} disabled={content.length > max_length} />
     </form>
     <Group direction="column">
-    {
-    result.shortcode
-    && <Group>
-      <Text>Shortcode: </Text>
-      <Anchor component={Link} to={`/text/${result.shortcode}`}>{result.shortcode}</Anchor>
-      <Button children='📋' onClick={() => {
-        navigator.clipboard.writeText(`/text/${result.shortcode}`)
-      }} />
-    </Group>
-    }
-    {
-      result.error && <Text color='red' children={result.error} />
-    }
+      { result.shortcode && <Shortcode base_uri={'/text/'} shortcode={result.shortcode} /> }
+      {
+        result.error && <Text color='red' children={result.error} />
+      }
     </Group>
   </Group>
 }
