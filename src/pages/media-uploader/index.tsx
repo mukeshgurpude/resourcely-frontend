@@ -37,9 +37,7 @@ export default function MediaUploader() {
     setMedia(acceptedFiles[0]);
   }
 
-  useEffect(() => {
-    setResult({})
-  }, [media])
+  useEffect(() => setResult({}), [media])
 
   function upload_media(ev: MouseEvent<HTMLButtonElement>) {
     ev.preventDefault();
