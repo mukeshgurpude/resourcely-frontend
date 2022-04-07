@@ -26,7 +26,7 @@ export default function Shortcode({ base_uri, shortcode, external=false, queryst
     bgcolor: theme.colorScheme === 'light' ? theme.colors.gray[0] : theme.colors.dark[9],
   }
 
-  return <Group align='center' style={{boxShadow: theme.shadows.xl, padding: theme.spacing.md}}>
+  return <Group align='center' style={{boxShadow: theme.shadows.xl, padding: theme.spacing.md, alignSelf: 'center'}}>
     <Group direction='column' align='center' spacing='sm'>
       <Text>Shortcode</Text>
       <Text style={{display: 'flex', alignItems: 'center', gap: 5}}>
