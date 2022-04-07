@@ -5,6 +5,7 @@ import Header from './components/header';
 import Nav from './components/nav';
 import Url from './pages/url'
 import Text, { TextView } from './pages/text'
+import MediaUploader, { MediaView } from './pages/media-uploader'
 
 function App() {
   return <BrowserRouter>
@@ -17,6 +18,10 @@ function App() {
           <Route path="/text">
             <Route path='' element={<Text/>}/>
             <Route path=":shortcode" element={<TextView/>} />
+          </Route>
+          <Route path='/media'>
+            <Route path='' element={<MediaUploader/>} />
+            <Route path=':shortcode' element={<MediaView/>} />
           </Route>
           <Route path='*' element={<div>Not found</div>} />
         </Routes>

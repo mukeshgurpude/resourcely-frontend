@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@mantine/core": "^4.0.5",
+    "@mantine/dropzone": "^4.1.2",
     "@mantine/prism": "^4.1.2",
     "@monaco-editor/react": "^4.4.1",
     "@testing-library/jest-dom": "^5.16.2",
