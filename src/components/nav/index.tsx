@@ -5,8 +5,7 @@ import Logo from '../logo'
 const links = [
   { title: 'Url Shortner', path: '/'},
   { title: 'Text Upload', path: '/text'},
-  { title: 'Media Upload', path: '/media'},
-  // { title: 'File Upload', path: '/file'},
+  { title: 'Media Upload', path: '/media'}
 ]
 
 export default function Nav() {
