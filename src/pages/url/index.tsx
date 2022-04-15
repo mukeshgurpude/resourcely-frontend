@@ -24,7 +24,7 @@ export default function Url() {
       setLoading(true)
       api.post('/shortener', { original_url: url })
         .then(res => setResult(res.data))
-        .catch(setResult)
+        .catch(err => setResult(err.response.data))
         .finally(() => setLoading(false))
     }} style={{padding: '1em'}}>
 

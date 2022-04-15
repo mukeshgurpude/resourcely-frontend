@@ -10,11 +10,9 @@ type Props = {
 export default function MonacoEditor({ value, setValue, language }: Props) {
   const theme = useMantineTheme()
   return <Editor
-    language={language} value={value} width={400}
+    language={language} value={value} width={600}
     onChange={val => setValue(val ?? '')}
-    height="150px" theme={theme.colorScheme === 'light' ? 'light' : 'vs-dark'}
-    options={{
-      contextmenu: false,
-    }}
+    height={200} theme={theme.colorScheme === 'light' ? 'light' : 'vs-dark'}
+    options={{ contextmenu: false }}
   />
 }

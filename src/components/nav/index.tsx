@@ -6,7 +6,7 @@ const links = [
   { title: 'Url Shortner', path: '/'},
   { title: 'Text Upload', path: '/text'},
   { title: 'Media Upload', path: '/media'},
-  { title: 'File Upload', path: '/file'},
+  // { title: 'File Upload', path: '/file'},
 ]
 
 export default function Nav() {
