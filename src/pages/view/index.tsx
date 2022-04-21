@@ -25,7 +25,8 @@ export default function View() {
       shortcode: 'Invalid shortcode'
     }
   })
-  const [result, setResult] = useState<ResponseType>({})
+  const [ result, setResult ] = useState<ResponseType>({})
+  const [ loading, setLoading ] = useState(false)
 
   function get_resource(values: typeof form.values) {
     const pre = values.shortcode[0] as initials
@@ -33,7 +34,7 @@ export default function View() {
     if (values.hasPassword) {
       extra_headers['password'] = values.password
     }
-
+    setLoading(true)
     api.get(`${prefixes[pre]}/${values.shortcode}`, { headers: extra_headers })
       .then(res => {
         setResult(res.data)
@@ -43,7 +44,7 @@ export default function View() {
       })
       .catch(err => {
         setResult({ error: err.response.data.error ?? err.response.data.message })
-      })
+      }).finally(() => setLoading(false))
   }
 
   function validate_field(name: field) {
@@ -77,7 +78,7 @@ export default function View() {
           {...form.getInputProps('password')}
         />
       }
-      <Button style={{alignSelf: 'center'}} type='submit' children='View resource' />
+      <Button loading={loading} style={{alignSelf: 'center'}} type='submit' children='View resource' />
     </form>
   </Group>
 

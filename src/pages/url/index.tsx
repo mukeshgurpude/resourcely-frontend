@@ -1,6 +1,7 @@
-import { Accordion, Button, Code, Group, PasswordInput, Text, TextInput } from "@mantine/core";
+import { Button, Code, Group, Text, TextInput } from "@mantine/core";
 import { useEffect, useState } from "react";
 import Shortcode from "../../components/shortcode";
+import Password from "../../components/password";
 import api, { base_url } from '../../services';
 
 type UrlType = {
@@ -23,11 +24,9 @@ export default function Url() {
     <form onSubmit={(event) => {
       event.preventDefault()
       setLoading(true)
-      api.post('/shortener', { original_url: url, password: pass ?? undefined })
+      api.post('/shortener', { original_url: url, password: pass === '' ? undefined: pass })
         .then(res => {
-          setResult(res.data)
-          setUrl('')
-          setPass('')
+          setResult(res.data);
         })
         .catch(err => setResult(err.response.data))
         .finally(() => setLoading(false))
@@ -40,11 +39,7 @@ export default function Url() {
           onChange={(e) => setUrl(e.target.value)}
           placeholder="Url to shorten" required
         />
-        <Accordion offsetIcon={false}>
-          <Accordion.Item label='Advanced options'>
-            <PasswordInput name='password' label='Password' value={pass} onChange={(e) => setPass(e.target.value)} />
-          </Accordion.Item>
-        </Accordion>
+        <Password name='password' label='Password' value={pass} onChange={(e) => setPass(e.target.value)} />
         <Button {...{ loading }} type="submit" style={{alignSelf: 'end'}} children="Shorten"/>
       </Group>
     </form>
