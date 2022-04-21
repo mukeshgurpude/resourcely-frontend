@@ -25,9 +25,7 @@ export default function Url() {
       event.preventDefault()
       setLoading(true)
       api.post('/shortener', { original_url: url, password: pass === '' ? undefined: pass })
-        .then(res => {
-          setResult(res.data);
-        })
+        .then(res => { setResult(res.data);})
         .catch(err => setResult(err.response.data))
         .finally(() => setLoading(false))
     }} style={{padding: '1em'}}>

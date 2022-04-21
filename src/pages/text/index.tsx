@@ -39,7 +39,7 @@ export default function TextUi() {
     <form onSubmit={(event) => {
       event.preventDefault()
       setLoading(true)
-      api.post('/text', { text: content, title, language })
+      api.post('/text', { text: content, title, language, password: password.length ? password : undefined })
         .then(res => setResult(res.data))
         .catch(({response: {data}}) => setResult(data))
         .finally(() => setLoading(false))

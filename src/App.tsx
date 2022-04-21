@@ -6,7 +6,7 @@ import Nav from './components/nav';
 import Url from './pages/url'
 import Text, { TextView } from './pages/text'
 import MediaUploader, { MediaView, FileView } from './pages/media-uploader'
-import View from './pages/view';
+import View, { ResourceView } from './pages/view';
 
 
 function App() {
@@ -17,6 +17,7 @@ function App() {
       <Container fluid style={{flex: '0 0 100%'}}>
         <Routes>
           <Route path='/get' element={<View/>} />
+          <Route path='/view/:shortcode' element={<ResourceView/>} />
           <Route path="/" element={<Url/>} />
           <Route path="/text">
             <Route path='' element={<Text/>}/>
