@@ -5,5 +5,7 @@ const api = axios.create({
   baseURL: base_url
 })
 
-export { base_url }
+const prefixes = { u: '/shortener', t: '/text', i: '/image', f: '/file' }
+
+export { base_url, prefixes }
 export default api

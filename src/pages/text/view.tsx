@@ -31,6 +31,6 @@ export function TextView() {
   }
 
   return <Container>
-    <Prism withLineNumbers children={result?.text} language={result.language as Language} />
+    <Prism withLineNumbers children={result?.text as string} language={result.language as Language} />
   </Container>
 }
