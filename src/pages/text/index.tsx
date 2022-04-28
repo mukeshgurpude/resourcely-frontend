@@ -3,6 +3,7 @@ import { Button, Group, InputWrapper, Select, Text, TextInput } from '@mantine/c
 import { Language } from 'prism-react-renderer'
 import MonacoEditor from '../../components/editor'
 import Shortcode from '../../components/shortcode'
+import Password from '../../components/password'
 import api from '../../services'
 
 export type Lang = Language | 'plain';
@@ -22,6 +23,7 @@ export default function TextUi() {
   const [content, setContent] = useState('')
   const [title, setTitle] = useState('')
   const [language, setLang] = useState<Lang>('plain')
+  const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const [result, setResult] = useState<TextType>({})
 
@@ -37,7 +39,7 @@ export default function TextUi() {
     <form onSubmit={(event) => {
       event.preventDefault()
       setLoading(true)
-      api.post('/text', { text: content, title, language })
+      api.post('/text', { text: content, title, language, password: password.length ? password : undefined })
         .then(res => setResult(res.data))
         .catch(({response: {data}}) => setResult(data))
         .finally(() => setLoading(false))
@@ -51,6 +53,7 @@ export default function TextUi() {
       <InputWrapper label='Text' required>
         <MonacoEditor value={content} setValue={setContent} language={language} />
       </InputWrapper>
+      <Password name='password' label='Password' value={password} onChange={(e) => setPassword(e.target.value)} />
       <Button style={{alignSelf: 'center'}} type='submit' children="Upload" {...{loading}} disabled={content.length > max_length} />
     </form>
     <Group direction="column">

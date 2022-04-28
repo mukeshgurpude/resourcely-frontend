@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Prism } from '@mantine/prism'
 import { Language } from 'prism-react-renderer'
-import api from '../../services'
 
 type TextType = {
   text ?: string
@@ -13,15 +12,8 @@ type TextType = {
   language ?: string
 }
 
-export function TextView() {
+export function TextView(result: TextType) {
   const { shortcode } = useParams()
-  const [result, setResult] = useState<TextType>({})
-
-  useEffect(() => {
-    api.get(`/text/${shortcode}`)
-      .then(res => setResult(res.data))
-      .catch(({response: {data}}) => setResult(data))
-  }, [shortcode])
 
   if (!Object.keys(result).length) {
     return <Loader />
@@ -31,6 +23,6 @@ export function TextView() {
   }
 
   return <Container>
-    <Prism withLineNumbers children={result?.text} language={result.language as Language} />
+    <Prism withLineNumbers children={result?.text as string} language={result.language as Language} />
   </Container>
 }
