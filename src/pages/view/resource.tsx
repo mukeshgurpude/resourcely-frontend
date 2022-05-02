@@ -48,7 +48,7 @@ export default function ResourceView() {
     case 'i':
       return <MediaView {...{...result, password: pass}} />
     case 'f':
-      return <FileView {...result}/>
+      return <FileView {...{...result, password: pass}} />
   }
   return <Loader/>
 }
