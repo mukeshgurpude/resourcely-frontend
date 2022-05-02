@@ -34,9 +34,9 @@ export default function ResourceView() {
     }
     const cancel_token = axios.CancelToken.source()
 
-    api.get(`${base}/${shortcode}`, { cancelToken: cancel_token.token })
-      .then(res => setResult(res.data))
-      .catch(error => setResult(error.res.data))
+    api.get(`${base}/${shortcode}?meta=true`, { cancelToken: cancel_token.token })
+      .then(res => setResult(res?.data))
+      .catch(error => setResult(error?.response?.data ?? { error: error.message }))
     return cancel_token.cancel
   }, [shortcode, result])
 
@@ -46,7 +46,7 @@ export default function ResourceView() {
     case 'i':
       return <MediaView />
     case 'f':
-      return <FileView />
+      return <FileView { ...result }/>
   }
   return <Loader/>
 }

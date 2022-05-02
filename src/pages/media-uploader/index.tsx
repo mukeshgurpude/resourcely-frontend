@@ -74,7 +74,7 @@ export default function MediaUploader() {
     />
     { result?.error && <Text sx={{alignSelf: 'center'}} inline color='red'>{result.error}</Text> }
     <Button sx={{alignSelf: 'center'}} loading={loading} onClick={upload_media}>Upload</Button>
-    { result?.shortcode && <Shortcode base_uri={is_image(media as File) ? '/media' : '/file'} shortcode={result?.shortcode} /> }
+    { result?.shortcode && <Shortcode base_uri='/view' shortcode={result?.shortcode} /> }
   </Group>
 }
 

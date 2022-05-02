@@ -1,7 +1,6 @@
-import { Container, Text } from '@mantine/core'
+import { Container, Loader, Text } from '@mantine/core'
 import { Prism } from '@mantine/prism'
 import { Language } from 'prism-react-renderer'
-import { Navigate } from 'react-router-dom'
 
 type TextType = {
   text ?: string
@@ -14,7 +13,7 @@ type TextType = {
 export function TextView(result: TextType) {
   if (!Object.keys(result).length) {
     // TODO: Show 404 instead
-    return <Navigate to='/' replace />
+    return <Loader />
   }
   if (result.error) {
     return <Text color='red' children={result.error} />
