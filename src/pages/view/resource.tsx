@@ -44,9 +44,9 @@ export default function ResourceView() {
     case 't':
       return <TextView {...result} />
     case 'i':
-      return <MediaView />
+      return <MediaView {...result} />
     case 'f':
-      return <FileView { ...result }/>
+      return <FileView {...result}/>
   }
   return <Loader/>
 }
