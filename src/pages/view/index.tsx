@@ -44,7 +44,7 @@ export default function View() {
         if (res.data.original_url) {
           window.location.href = res.data.original_url
         } else {
-          navigate(`/view/${values.shortcode}`, { replace: true, state: { response: res.data } })
+          navigate(`/view/${values.shortcode}`, { replace: true, state: { response: res.data, password: form.values.password } })
         }
       })
       .catch(err => {

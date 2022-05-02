@@ -20,6 +20,8 @@ export default function ResourceView() {
   const location = useLocation()
   // @ts-ignore
   const [ result, setResult ] = useState<ResponseType>(location.state?.response ?? {})
+  // @ts-ignore
+  const [ pass, ] = useState<string|undefined>(location.state?.password)
 
   useEffect(() => {
     if (Object.keys(result).length) return;
@@ -44,7 +46,7 @@ export default function ResourceView() {
     case 't':
       return <TextView {...result} />
     case 'i':
-      return <MediaView {...result} />
+      return <MediaView {...{...result, password: pass}} />
     case 'f':
       return <FileView {...result}/>
   }
