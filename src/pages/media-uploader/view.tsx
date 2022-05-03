@@ -15,7 +15,7 @@ export function MediaView(data: mediaType) {
 
   useEffect(() => {
     const url = `${base_url}/image/${shortcode}`
-    download_file(url, data.password)()
+    download_file(url, data.password, true)()
       .then(setImage)
   }, [data.password, shortcode])
 
