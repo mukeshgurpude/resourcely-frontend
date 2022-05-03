@@ -1,7 +1,8 @@
 import { useParams } from 'react-router-dom'
 import { Anchor, Group, Image, Loader, Text, Title } from '@mantine/core'
-import api, { base_url } from '../../services'
+import { base_url } from '../../services'
 import { useEffect, useState } from 'react'
+import { download_file } from '../../utils'
 
 type mediaType = {
   error?: string
@@ -14,12 +15,8 @@ export function MediaView(data: mediaType) {
 
   useEffect(() => {
     const url = `${base_url}/image/${shortcode}`
-    const headers = {} as {[key: string]: string}
-    if (data.password) {
-      headers['password'] = data.password
-    }
-    api.get(url, { responseType: 'blob', headers })
-      .then(res => setImage(window.URL.createObjectURL(res.data)) )
+    download_file(url, data.password)()
+      .then(setImage)
   }, [data.password, shortcode])
 
   if (Object.keys(data).length === 0) { return <Loader /> }
