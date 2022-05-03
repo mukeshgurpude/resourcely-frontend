@@ -1,4 +1,4 @@
-import api from './services'
+import api from '../services'
 
 export function download_file(base_url: string, password?: string, noDownload=false) {
   return async function () {
