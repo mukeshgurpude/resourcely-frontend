@@ -19,6 +19,7 @@ export function MediaView(data: mediaType) {
       .then(setImage)
   }, [data.password, shortcode])
 
+  // TODO: replace with 404
   if (Object.keys(data).length === 0) { return <Loader /> }
 
   return <Group position='center' align='center' direction='column' grow spacing={0}>

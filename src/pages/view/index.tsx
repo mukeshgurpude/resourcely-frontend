@@ -47,9 +47,8 @@ export default function View() {
           navigate(`/_/${values.shortcode}`, { replace: true, state: { response: res.data, password: form.values.password } })
         }
       })
-      .catch(err => {
-        setResult({ error: err.response.data.error ?? err.response.data.message })
-      }).finally(() => setLoading(false))
+      .catch(({ response: { data } }) => setResult({ error: data.error ?? data.message }))
+      .finally(() => setLoading(false))
   }
 
   function validate_field(name: field) {

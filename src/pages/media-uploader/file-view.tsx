@@ -11,6 +11,7 @@ type mediaType = {
 export function FileView(data: mediaType) {
   const { shortcode } = useParams()
   const url = `${base_url}/file/${shortcode}`
+  // TODO: replace with 404
   if (Object.keys(data).length === 0) { return <Loader /> }
 
   return <Group position='center' align='center' direction='column' grow spacing={0}>

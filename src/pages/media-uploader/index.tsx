@@ -14,7 +14,7 @@ function is_image(file: File): boolean {
 
 function DropzoneChild(status: DropzoneStatus, media: File|null) {
   const theme = useMantineTheme()
-  return <Group position={media ? 'apart' : 'center'} style={{minHeight: 200, minWidth: 400}}>
+  return <Group position={media ? 'apart' : 'center'} style={{ minHeight: 200, minWidth: 400 }}>
     {
     media ? <>
       <Group direction='column' spacing={0} position='center'>
@@ -22,9 +22,11 @@ function DropzoneChild(status: DropzoneStatus, media: File|null) {
         <Text underline>{media.name}</Text>
         <Text weight='bold'>{(media.size/1024).toFixed(2)}Kb</Text>
       </Group>
+
+      {/* Preview pane */}
       <Image width={200} height={200} radius='sm' fit='contain'
         src={URL.createObjectURL(media)} alt={media.name}
-        style={{boxShadow: theme.shadows.lg}} withPlaceholder
+        style={{ boxShadow: theme.shadows.lg }} withPlaceholder
         placeholder={<span>No preview available</span>}
       />
     </>

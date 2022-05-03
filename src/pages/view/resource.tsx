@@ -16,6 +16,7 @@ interface Response {
 type ResponseType = Response | { [key: string]: string }
 
 export default function ResourceView() {
+  // TODO: Provide a modal for password in case 401 occurs
   const { shortcode } = useParams() as { shortcode: string }
   const location = useLocation()
   // @ts-ignore
