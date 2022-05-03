@@ -1,6 +1,4 @@
 import { Container, Loader, Text } from '@mantine/core'
-import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
 import { Prism } from '@mantine/prism'
 import { Language } from 'prism-react-renderer'
 
@@ -13,9 +11,8 @@ type TextType = {
 }
 
 export function TextView(result: TextType) {
-  const { shortcode } = useParams()
-
   if (!Object.keys(result).length) {
+    // TODO: Show 404 instead
     return <Loader />
   }
   if (result.error) {

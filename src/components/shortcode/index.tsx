@@ -10,11 +10,13 @@ type Props = {
   external ?: boolean
 }
 
+/** A reusable shortcode component consisting of copy button and qr code */
 export default function Shortcode({ base_uri, shortcode, external=false, querystring={} }: Props) {
-  const clipboard = useClipboard({timeout: 3000})
+  const clipboard = useClipboard({timeout: 3000}) // Timeout is the delay between two copy events
   const theme = useMantineTheme()
   let full_url = `${base_uri.replace(/\/+$/, '')}/${shortcode}`
 
+  // Build full url from querystring object
   if (Object.keys(querystring).length > 0) {
     full_url += '?' + Object.entries(querystring).map(([key, value]) => `${key}=${value}`).join('&')
   }

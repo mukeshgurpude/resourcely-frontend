@@ -4,8 +4,8 @@ import Footer from './components/footer';
 import Header from './components/header';
 import Nav from './components/nav';
 import Url from './pages/url'
-import Text, { TextView } from './pages/text'
-import MediaUploader, { MediaView, FileView } from './pages/media-uploader'
+import Text from './pages/text'
+import MediaUploader from './pages/media-uploader'
 import View, { ResourceView } from './pages/view';
 
 
@@ -16,18 +16,11 @@ function App() {
       <Nav/>
       <Container fluid style={{flex: '0 0 100%'}}>
         <Routes>
-          <Route path='/get' element={<View/>} />
-          <Route path='/view/:shortcode' element={<ResourceView/>} />
-          <Route path="/" element={<Url/>} />
-          <Route path="/text">
-            <Route path='' element={<Text/>}/>
-            <Route path=":shortcode" element={<TextView/>} />
-          </Route>
-          <Route path='/media'>
-            <Route path='' element={<MediaUploader/>} />
-            <Route path=':shortcode' element={<MediaView/>} />
-          </Route>
-          <Route path='/file/:shortcode' element={<FileView/>} />
+          <Route path='/' element={<View/>} />
+          <Route path='/_/:shortcode' element={<ResourceView/>} />
+          <Route path="/url" element={<Url/>} />
+          <Route path="/text" element={<Text/>}/>
+          <Route path='/media' element={<MediaUploader/>} />
           <Route path='*' element={<div>Not found</div>} />
         </Routes>
       </Container>

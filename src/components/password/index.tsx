@@ -5,6 +5,7 @@ interface Props {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
+/** A reusable component for use in passwords that includes password */
 export default function Password({ value, onChange, ...props }: Props | PasswordInputProps) {
   return <Accordion offsetIcon={false}>
     <Accordion.Item label='Advanced options'>

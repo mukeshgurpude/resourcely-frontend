@@ -44,12 +44,11 @@ export default function View() {
         if (res.data.original_url) {
           window.location.href = res.data.original_url
         } else {
-          navigate(`/view/${values.shortcode}`, { replace: true, state: { response: res.data } })
+          navigate(`/_/${values.shortcode}`, { replace: true, state: { response: res.data, password: form.values.password } })
         }
       })
-      .catch(err => {
-        setResult({ error: err.response.data.error ?? err.response.data.message })
-      }).finally(() => setLoading(false))
+      .catch(({ response: { data } }) => setResult({ error: data.error ?? data.message }))
+      .finally(() => setLoading(false))
   }
 
   function validate_field(name: field) {
