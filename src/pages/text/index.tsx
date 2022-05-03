@@ -57,7 +57,7 @@ export default function TextUi() {
       <Button style={{alignSelf: 'center'}} type='submit' children="Upload" {...{loading}} disabled={content.length > max_length} />
     </form>
     <Group direction="column">
-      { result.shortcode && <Shortcode base_uri={'/text/'} shortcode={result.shortcode} /> }
+      { result.shortcode && <Shortcode base_uri={'/_'} shortcode={result.shortcode} /> }
       {
         result.error && <Text color='red' children={result.error} />
       }

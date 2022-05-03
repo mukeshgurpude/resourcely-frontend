@@ -81,7 +81,7 @@ export default function MediaUploader() {
     <Password name='password' label='Password' value={pass} onChange={(e) => setPass(e.target.value)} />
     { result?.error && <Text sx={{alignSelf: 'center'}} inline color='red'>{result.error}</Text> }
     <Button sx={{alignSelf: 'center'}} loading={loading} onClick={upload_media}>Upload</Button>
-    { result?.shortcode && <Shortcode base_uri='/view' shortcode={result?.shortcode} /> }
+    { result?.shortcode && <Shortcode base_uri='/_' shortcode={result?.shortcode} /> }
   </Group>
 }
 

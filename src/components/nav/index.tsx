@@ -3,10 +3,10 @@ import { NavLink } from "react-router-dom";
 import Logo from '../logo'
 
 const links = [
-  { title: 'Url Shortner', path: '/'},
+  { title: 'Get resource', path: '/'},
+  { title: 'Url Shortner', path: '/url'},
   { title: 'Text Upload', path: '/text'},
-  { title: 'Media Upload', path: '/media'},
-  { title: 'View', path: '/get'}
+  { title: 'Media Upload', path: '/media'}
 ]
 
 export default function Nav() {
